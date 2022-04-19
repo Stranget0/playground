@@ -1,0 +1,19 @@
+%flex {
+  display: flex;
+}
+%fill {
+  flex: 2 1 auto;
+}
+
+.Grid {
+  @extend %flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.Row {
+  @extend %flex;
+  @extend %fill;
+}
+.Cell {
+  @extend %fill;
+}
