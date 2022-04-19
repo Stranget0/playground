@@ -22,10 +22,9 @@ const Cell = ({ x, y, hasNext, gap, updateDelay }: Props) => {
     getCellStyle?.(positionData)
   );
 
-  useEffect(
-    () => getCellStyle && setComputedStyle(getCellStyle(positionData)),
-    [getCellStyle]
-  );
+  useEffect(() => {
+    requestAnimationFrame(() => setComputedStyle(getCellStyle?.(positionData)));
+  }, [getCellStyle]);
   // useEffect(() => {
   //   if (!cellRef.current) return;
   //   const { top, left, width, height } =
