@@ -11,10 +11,10 @@ export type CellContentProps = SetCellParam;
 
 export type CellContextState = {
   cellClass?: string;
-  setCellStyle?: SetCellStyle;
+  getCellStyle?: getCellStyle;
   CellContent?: FC<CellContentProps>;
 };
-export type SetCellStyle = (params: SetCellParam) => CSSProperties;
+export type getCellStyle = (params: SetCellParam) => CSSProperties;
 //#endregion
 
 const initial: CellContextState = {};

@@ -9,6 +9,7 @@ interface Props extends CellContextState {
   width: number;
   height: number;
   gap?: number;
+	updateDelaySpread?: number;
 }
 
 const Grid = ({
@@ -17,8 +18,9 @@ const Grid = ({
   width,
   gap = 0,
   CellContent,
-  setCellStyle,
+  getCellStyle,
   cellClass,
+	updateDelaySpread=15
 }: Props) => {
   const countX = getAxisElementCount(cellSize, width, gap);
   const countY = getAxisElementCount(cellSize, height, gap);
@@ -31,6 +33,8 @@ const Grid = ({
           key={y}
           y={y}
           countX={countX}
+					countY={countY}
+					updateDelaySpread={updateDelaySpread}
           gap={gap}
           hasNext={y !== countY - 1}
         />
@@ -43,7 +47,7 @@ const Grid = ({
     <div className={classes.Grid} style={{ width, height }}>
       <CellProvider
         cellClass={cellClass}
-        setCellStyle={setCellStyle}
+        getCellStyle={getCellStyle}
         CellContent={CellContent}
       >
         {rows}
