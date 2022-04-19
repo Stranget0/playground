@@ -1,4 +1,11 @@
-import { createContext, CSSProperties, FC, ReactNode, useContext } from "react";
+import {
+  createContext,
+  CSSProperties,
+  FC,
+  ReactNode,
+  RefObject,
+  useContext,
+} from "react";
 
 //#region Types
 export type SetCellParam = {
@@ -6,6 +13,7 @@ export type SetCellParam = {
   y: number;
   posX: number;
   posY: number;
+  cellRef?: RefObject<HTMLDivElement>;
 };
 export type CellContentProps = SetCellParam;
 

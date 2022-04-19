@@ -5,16 +5,12 @@ import classes from "../Grid.module.scss";
 interface Props {
   y: number;
   countX: number;
-  countY: number;
   gap: number;
   hasNext: boolean;
-  updateDelaySpread: number;
 }
 
-const Row = ({ y, countX, countY, gap, hasNext, updateDelaySpread }: Props) => {
+const Row = ({ y, countX, gap, hasNext }: Props) => {
   const rowStyle = { marginBottom: hasNext ? gap : undefined };
-
-  const updateDelay = updateDelaySpread * Math.abs(countY / 2 - y);
 
   const cells = useMemo(() => {
     const _cells: ReactElement[] = [];
@@ -26,9 +22,6 @@ const Row = ({ y, countX, countY, gap, hasNext, updateDelaySpread }: Props) => {
           y={y}
           hasNext={x !== countX - 1}
           gap={gap}
-          updateDelay={
-            updateDelay
-          }
         />
       );
     }

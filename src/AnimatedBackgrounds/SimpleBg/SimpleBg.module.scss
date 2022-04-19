@@ -1,5 +1,5 @@
 .Cell {
   height: 100%;
   background-color: #f6d60c;
-	transition: .5s opacity ease-out;
+	transition: .3s opacity linear, .3s transform ease-out;
 }
