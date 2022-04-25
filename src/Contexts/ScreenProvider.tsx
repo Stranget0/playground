@@ -23,8 +23,6 @@ const screenContext = createContext<State>(initial);
 type Props = { children: ReactElement };
 const ScreenProvider: FC<Props> = ({ children }) => {
   const [screenData, setScreenData] = useState(initial);
-	console.log(screenData);
-	
   useEffect(() => {
     function update() {
       const { innerHeight, innerWidth, outerHeight, outerWidth } = window;

@@ -27,7 +27,7 @@ const MouseProvider: FC<Props> = ({ children }) => {
     const update = throttle((e: MouseEvent) => {
       const { clientX, clientY, movementX, movementY } = e;
       setMouseData({ clientX, clientY, movementX, movementY });
-    }, 200);
+    }, 100);
 
     addEventListener("mousemove", update);
     return () => {

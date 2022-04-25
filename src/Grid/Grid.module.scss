@@ -2,18 +2,28 @@
   display: flex;
 }
 %fill {
-  flex: 2 1 auto;
+  flex: 1 0 auto;
 }
-
+.GridContainer{
+	overflow: hidden;
+}
 .Grid {
   @extend %flex;
   flex-direction: column;
-  overflow: hidden;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
 }
 .Row {
   @extend %flex;
   @extend %fill;
+	justify-content: center;
 }
 .Cell {
-  @extend %fill;
+	flex: 0 0 auto;
+	position: relative;
+	&__Overlay{
+		position: absolute;
+		inset: 0;
+	}
 }

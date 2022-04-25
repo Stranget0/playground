@@ -1,53 +1,62 @@
-import { useMemo, ReactElement } from "react";
-import CellProvider, { CellContextState } from "./contexts/CellContentProvider";
+import { useMemo, ReactElement, CSSProperties } from "react";
+import classNames from "classnames";
 import getAxisElementCount from "./utils/getAxisElementCount";
 import Row from "./Containers/Row";
 import classes from "./Grid.module.scss";
+import { PassedProps } from "./Containers/types";
 
-interface Props extends CellContextState {
+interface Props extends PassedProps {
   cellSize: number;
   width: number;
   height: number;
   gap?: number;
+  gridStyle?: CSSProperties;
+  gridClass?: string;
+  extraInternalWidth?: number;
+  extraInternalHeight?: number;
 }
 
 const Grid = ({
-  cellSize,
   height,
   width,
   gap = 0,
-  CellContent,
-  getCellStyle,
-  cellClass,
+  gridStyle,
+  gridClass,
+  extraInternalWidth = 0,
+  extraInternalHeight = 0,
+  ...cellProps
 }: Props) => {
-  const countX = getAxisElementCount(cellSize, width, gap);
-  const countY = getAxisElementCount(cellSize, height, gap);
+  const { cellSize } = cellProps;
+  const countX = getAxisElementCount(cellSize, width + extraInternalWidth, gap);
+  const countY = getAxisElementCount(cellSize, height + extraInternalHeight, gap);
 
-  const rows = useMemo(() => {
-    const _rows: ReactElement[] = [];
+    const rows: ReactElement[] = [];
     for (let y = 0; y < countY; y++) {
-      _rows.push(
+      rows.push(
         <Row
           key={y}
           y={y}
           countX={countX}
+          countY={countY}
           gap={gap}
           hasNext={y !== countY - 1}
+          {...cellProps}
         />
       );
     }
-    return _rows;
-  }, [countY, countX, gap]);
 
   return (
-    <div className={classes.Grid} style={{ width, height }}>
-      <CellProvider
-        cellClass={cellClass}
-        getCellStyle={getCellStyle}
-        CellContent={CellContent}
+    <div className={classes.GridContainer} style={{ width, height }}>
+      <div
+        className={classNames(classes.Grid, gridClass)}
+        style={{
+          width: width + extraInternalWidth,
+          height: height + extraInternalHeight,
+          ...gridStyle,
+        }}
       >
         {rows}
-      </CellProvider>
+      </div>
     </div>
   );
 };

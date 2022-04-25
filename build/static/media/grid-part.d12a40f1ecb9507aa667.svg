@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 178.07 178.07">
+	<defs>
+		<style>.b,.c{fill:#fff;}.d{fill:none;stroke:#fff;stroke-linejoin:round;stroke-width:.5px;}</style>
+	</defs>
+	<g class="e">
+		<rect class="b" x="175.58" y=".43" width="2.06" height="2.06" transform="translate(50.7 125.31) rotate(-45)" />
+		<rect class="b" x="175.58" y="58.81" width="2.06" height="2.06" transform="translate(9.41 142.41) rotate(-45)" />
+		<rect class="b" x="175.58" y="117.19" width="2.06" height="2.06" transform="translate(-31.87 159.51) rotate(-45)" />
+		<rect class="b" x="175.58" y="175.58" width="2.06" height="2.06" transform="translate(-73.15 176.61) rotate(-45)" />
+		<rect class="b" x="117.19" y=".43" width="2.06" height="2.06" transform="translate(33.6 84.03) rotate(-45)" />
+		<rect class="b" x="117.19" y="58.81" width="2.06" height="2.06" transform="translate(-7.69 101.13) rotate(-45)" />
+		<rect class="b" x="117.19" y="117.19" width="2.06" height="2.06" transform="translate(-48.97 118.23) rotate(-45)" />
+		<rect class="b" x="117.19" y="175.58" width="2.06" height="2.06" transform="translate(-90.25 135.32) rotate(-45)" />
+		<rect class="b" x="58.81" y=".43" width="2.06" height="2.06" transform="translate(16.5 42.74) rotate(-45)" />
+		<rect class="b" x="58.81" y="58.81" width="2.06" height="2.06" transform="translate(-24.79 59.84) rotate(-45)" />
+		<rect class="b" x="58.81" y="117.19" width="2.06" height="2.06" transform="translate(-66.07 76.94) rotate(-45)" />
+		<rect class="b" x="58.81" y="175.58" width="2.06" height="2.06" transform="translate(-107.35 94.04) rotate(-45)" />
+		<rect class="b" x=".43" y=".43" width="2.06" height="2.06" transform="translate(-.6 1.46) rotate(-45)" />
+		<rect class="b" x=".43" y="58.81" width="2.06" height="2.06" transform="translate(-41.89 18.56) rotate(-45)" />
+		<rect class="b" x=".43" y="117.19" width="2.06" height="2.06" transform="translate(-83.17 35.66) rotate(-45)" />
+		<rect class="b" x=".43" y="175.58" width="2.06" height="2.06" transform="translate(-124.45 52.76) rotate(-45)" />
+	</g>
+</svg>

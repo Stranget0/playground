@@ -1,55 +1,56 @@
 import classNames from "classnames";
-import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
-import { useCell } from "../contexts/CellContentProvider";
+import { useMemo } from "react";
 import classes from "../Grid.module.scss";
+import mergeStyles from "../utils/mergeStyles";
+import useComputeStyle from "../utils/useComputeStyle";
+import useElementRect from "../utils/useElementRect";
+import { CellFArgs, PassedProps } from "./types";
 
-interface Props {
+interface Props extends PassedProps, Pick<CellFArgs, "countY" | "countX"> {
   x: number;
   y: number;
   gap: number;
   hasNext: boolean;
 }
 
-const Cell = ({ x, y, hasNext, gap }: Props) => {
-  const [position, setPosition] = useState({ posX: 0, posY: 0 });
-  const cellRef = useRef<HTMLDivElement>(null);
-  const passData = { ...position, x, y, cellRef };
+const Cell = ({
+  cellSize,
+  countX,
+  countY,
+  x,
+  y,
+  gap,
+  hasNext,
+  cellClass,
+  CellContent,
+  getCellStyle,
+  getSecondaryStyle,
+}: Props) => {
+  const { rect, ref: cellRef } = useElementRect();
+  const passData = useMemo(
+    () => ({ ...rect, gridX: x, gridY: y, countX, countY, cellRef }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [countX, countY, rect, x, y]
+  );
+  const computedStyle = useComputeStyle(getCellStyle, passData);
+  const secondaryStyle = useComputeStyle(getSecondaryStyle, passData);
 
-  const { getCellStyle, CellContent, cellClass } = useCell();
+  const gapStyle = {
+    marginRight: hasNext ? gap : undefined,
+    width: cellSize,
+    height: cellSize,
+  };
 
-  const [computedStyle, setComputedStyle] = useState(getCellStyle?.(passData));
-
-  useEffect(() => {
-    if (cellRef.current) {
-      const { x: posX, y: posY } = cellRef.current.getBoundingClientRect();
-      setPosition({ posX, posY });
-    }
-  }, []);
-
-  useEffect(() => {
-    const frameId = requestAnimationFrame(() =>
-      setComputedStyle(getCellStyle?.(passData))
-    );
-    return () => cancelAnimationFrame(frameId);
-  }, [getCellStyle]);
-
-  const resultJSX = useMemo(() => {
-    const cellStyle = {
-      marginRight: hasNext ? gap : undefined,
-      ...computedStyle,
-    };
-    return (
-      <div
-        className={classNames(classes.Cell, cellClass)}
-        style={cellStyle}
-        ref={cellRef}
-      >
-        {CellContent && <CellContent {...passData} />}
-      </div>
-    );
-  }, [computedStyle, cellClass, CellContent]);
-
-  return resultJSX;
+  const cellStyle = mergeStyles(gapStyle, computedStyle, secondaryStyle);
+  return (
+    <div
+      className={classNames(classes.Cell, cellClass)}
+      style={cellStyle}
+      ref={cellRef}
+    >
+      {CellContent && <CellContent {...passData} />}
+    </div>
+  );
 };
 
 export type CellProps = Props;
