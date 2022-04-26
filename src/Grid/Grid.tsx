@@ -1,11 +1,11 @@
-import { useMemo, ReactElement, CSSProperties } from "react";
+import { ReactElement, CSSProperties, memo } from "react";
 import classNames from "classnames";
 import getAxisElementCount from "./utils/getAxisElementCount";
 import Row from "./Containers/Row";
 import classes from "./Grid.module.scss";
-import { PassedProps } from "./Containers/types";
+import { GridPassedProps } from "./Containers/types";
 
-interface Props extends PassedProps {
+interface Props extends GridPassedProps {
   cellSize: number;
   width: number;
   height: number;
@@ -24,26 +24,32 @@ const Grid = ({
   gridClass,
   extraInternalWidth = 0,
   extraInternalHeight = 0,
+  CellContent,
   ...cellProps
 }: Props) => {
   const { cellSize } = cellProps;
   const countX = getAxisElementCount(cellSize, width + extraInternalWidth, gap);
-  const countY = getAxisElementCount(cellSize, height + extraInternalHeight, gap);
+  const countY = getAxisElementCount(
+    cellSize,
+    height + extraInternalHeight,
+    gap
+  );
 
-    const rows: ReactElement[] = [];
-    for (let y = 0; y < countY; y++) {
-      rows.push(
-        <Row
-          key={y}
-          y={y}
-          countX={countX}
-          countY={countY}
-          gap={gap}
-          hasNext={y !== countY - 1}
-          {...cellProps}
-        />
-      );
-    }
+  const rows: ReactElement[] = [];
+  for (let y = 0; y < countY; y++) {
+    rows.push(
+      <Row
+        key={y}
+        y={y}
+        countX={countX}
+        countY={countY}
+        gap={gap}
+        hasNext={y !== countY - 1}
+        CellContent={CellContent}
+        {...cellProps}
+      />
+    );
+  }
 
   return (
     <div className={classes.GridContainer} style={{ width, height }}>
@@ -62,4 +68,4 @@ const Grid = ({
 };
 
 export type GridProps = Props;
-export default Grid;
+export default memo(Grid);

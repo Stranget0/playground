@@ -4,9 +4,9 @@ import classes from "../Grid.module.scss";
 import mergeStyles from "../utils/mergeStyles";
 import useComputeStyle from "../utils/useComputeStyle";
 import useElementRect from "../utils/useElementRect";
-import { CellFArgs, PassedProps } from "./types";
+import { CellFArgs, GridPassedProps } from "./types";
 
-interface Props extends PassedProps, Pick<CellFArgs, "countY" | "countX"> {
+interface Props extends GridPassedProps, Pick<CellFArgs, "countY" | "countX"> {
   x: number;
   y: number;
   gap: number;
@@ -22,9 +22,10 @@ const Cell = ({
   gap,
   hasNext,
   cellClass,
-  CellContent,
+  CellContent = () => null,
   getCellStyle,
   getSecondaryStyle,
+  getContentStyle,
 }: Props) => {
   const { rect, ref: cellRef } = useElementRect();
   const passData = useMemo(
@@ -48,7 +49,7 @@ const Cell = ({
       style={cellStyle}
       ref={cellRef}
     >
-      {CellContent && <CellContent {...passData} />}
+      <CellContent style={getContentStyle?.(passData)} />
     </div>
   );
 };

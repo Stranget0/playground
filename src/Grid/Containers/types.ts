@@ -12,10 +12,11 @@ export interface CellFArgs extends NodeRect {
   gridY: number;
 }
 export type GetStyle = (args: CellFArgs) => CSSProperties;
-export interface PassedProps {
+export interface GridPassedProps {
   cellSize: number;
   cellClass?: string;
   getCellStyle?: GetStyle;
   getSecondaryStyle?: GetStyle;
-  CellContent?: (props: CellFArgs) => ReactElement;
+	getContentStyle?: GetStyle;
+  CellContent?: (props: { style?: CSSProperties }) => ReactElement | null;
 }

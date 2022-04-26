@@ -1,6 +1,7 @@
 .Cell {
   // transition: 1s opacity linear; //, 2s transform cubic-bezier(0, 0.8, 0.5, 1);
   // perspective: 800px;
+	transition: .5s transform ease-out;
   opacity: 1;
 }
 // .Grid{

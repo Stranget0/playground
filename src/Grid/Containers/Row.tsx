@@ -1,9 +1,9 @@
-import { ReactElement, useMemo } from "react";
+import { memo, ReactElement } from "react";
 import Cell from "./Cell";
 import classes from "../Grid.module.scss";
-import { PassedProps } from "./types";
+import { GridPassedProps } from "./types";
 
-interface Props extends PassedProps {
+interface Props extends GridPassedProps {
   y: number;
   countX: number;
   countY: number;
@@ -11,24 +11,25 @@ interface Props extends PassedProps {
   hasNext: boolean;
 }
 
-const Row = ({ y, countX, countY, gap, hasNext, ...cellProps }: Props) => {
+const Row = ({ y, countX, countY, gap, hasNext,CellContent, ...cellProps }: Props) => {
   const rowStyle = { marginBottom: hasNext ? gap : undefined };
 
-    const cells: ReactElement[] = [];
-    for (let x = 0; x < countX; x++) {
-      cells.push(
-        <Cell
-          key={x + x * y}
-          x={x}
-          y={y}
-          hasNext={x !== countX - 1}
-          gap={gap}
-          countX={countX}
-          countY={countY}
-          {...cellProps}
-        />
-      );
-    }
+  const cells: ReactElement[] = [];
+  for (let x = 0; x < countX; x++) {
+    cells.push(
+      <Cell
+        key={x + (x + 1) * y}
+        x={x}
+        y={y}
+        hasNext={x !== countX - 1}
+        gap={gap}
+        countX={countX}
+        countY={countY}
+				CellContent={CellContent}
+        {...cellProps}
+      />
+    );
+  }
 
   return (
     <div className={classes.Row} style={rowStyle}>
@@ -37,4 +38,4 @@ const Row = ({ y, countX, countY, gap, hasNext, ...cellProps }: Props) => {
   );
 };
 
-export default Row;
+export default memo(Row);

@@ -2,7 +2,7 @@
   background-image: url("../../../assets/grid-part.svg");
   position: absolute;
   inset: -0.85%;
-	transition: .5s opacity linear;
+  opacity: 0.2;
 }
 .Cell {
   position: absolute;
@@ -10,7 +10,7 @@
   border: 1px solid rgb(255, 252, 88);
   background-color: #f6d60c;
   opacity: 0.5;
-	transition: .1s opacity linear;
+  transition: 1s opacity linear;
 }
 .Border {
   position: absolute;
